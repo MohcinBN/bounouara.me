@@ -11,7 +11,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'cat_id');
+    }
     
     // create protect array to help us when we want to create instance using model
     protected $fillable = ['title', 'description', 'image'];
+
+
+    
 }

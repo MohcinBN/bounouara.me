@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 
+
 class PostController extends Controller
 {
     // get the form from post views
     public function getFormPost() {
-        return view('post/add_form');
+        return view('admin/post/add_form');
     }
 
     public function createPost(Request $request){
@@ -22,7 +24,8 @@ class PostController extends Controller
 
             'title' => 'required',
             'description' => 'required',
-            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg',
+            //'cat_name' => 'required',
 
         ]);
 
@@ -41,6 +44,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = preg_replace('/\s+/', '-', $str);
         $post->description = $request->description;
+        $post->cat_id = $request->cat_id;
         $post->image = $imagename;
         $post->save();
 
@@ -57,15 +61,20 @@ class PostController extends Controller
     {
         //Show latest 5 posts in homepage
 
-        $posts = DB::table('posts')->orderBy('id', 'DESC')->paginate(5);
+        $posts = Post::with('category')->orderBy('id', 'DESC')->paginate(5);
 
-        return view('post.index', compact('posts'));
+        // test json
+        // return response()->json([
+        //     'posts'=>$posts
+        // ],200);
+
+        return view('public.post.index', compact('posts'));
     }
 
     public function show($slug)
     {
          $post = Post::where('slug', $slug)->firstOrFail();
-         return view('post.single', compact('post'));
+         return view('public.post.single', compact('post'));
     }
 
     /**
@@ -78,7 +87,8 @@ class PostController extends Controller
     {
         // edit posts
         $post = Post::find($id);
-        return view('post/edit', ['post' => $post]);
+        $categories = Category::all();
+        return view('admin/post/edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -121,6 +131,7 @@ class PostController extends Controller
 
         $post->title = $request->title;
         $post->description = $request->description;
+        $post->cat_id = $request->cat_id;
         $post->image = $imagename;
         $post->save();
         return redirect()->route('home')->with('success', 'Post has been updated successfully!');
@@ -139,7 +150,6 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('home')->with('success', 'Post has been deleted :( :(');
     }
-
 
 
 }

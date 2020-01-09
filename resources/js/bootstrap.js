@@ -13,6 +13,7 @@ try {
     require('bootstrap');
 
     require('summernote/dist/summernote-bs4.js');
+    require('admin-lte');
 } catch (e) {}
 
 /**

@@ -1,4 +1,4 @@
-@extends('layouts.master_2')
+@extends('layouts.master_')
 
 @section('title')
   Edit post 
@@ -6,23 +6,10 @@
 
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Post <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Nav item again</a>
-                    </li>
-                </ul>
-            </nav>
+ 
 
-            <main role="main" class="col-md-9">
-                <h1>Edit Post</h1>
+            <main role="main" class="ccol-md-10 offset-md-1 pt-4">
+                <h3>Edit this Post</h3>
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -32,7 +19,7 @@
                     </ul>
                 </div>
                 @endif
-                <div class="col-md-12">
+                <div class="col-md-12 pb-3">
                     <form method="post" action="{{ route('post.update', $post->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -45,6 +32,13 @@
                             <textarea class="form-control" id="content" rows="5" name="description">{{ $post->description }}</textarea>
                         </div>
                         <div class="form-group">
+                            <select name="cat_id" id="cat_id" class="form-control">
+                            @foreach ($categories as $category)
+                             <option value="{{ $category->id }}"{{ $category->id === $post->category_id ? ' selected' : '' }}>{{ $category->cat_name }}</option>
+                            @endforeach 
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <input type="file" name="image" id="selected">
 
                             <img src="" id="showed" width="500px" />
@@ -55,6 +49,5 @@
                     </form>
                 </div>
             </main>
-        </div>
-    </div>
+
 @endsection

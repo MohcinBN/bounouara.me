@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
+
 @section('title')
  {{ $post->title }}
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <main role="main" class="col-md-12">
                 <h1>{{ $post->title }}</h1>
@@ -42,3 +43,5 @@
         </div>
     </div>
 @endsection
+
+

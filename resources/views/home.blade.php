@@ -1,4 +1,4 @@
-@extends('layouts.master_2')
+@extends('layouts.master_3')
 
 @section('title')
   Blog Administration 
@@ -7,22 +7,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active admin-nav-items" href="/home">Posts <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tags</a>
-                    </li>
-                </ul>
-            </nav>
-
             <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
                 <h1>Posts
                     <a href="{{ route('post.form') }}">
@@ -43,8 +27,10 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Featured Image</th>
                         <th>Actions</th>
-                        <th>Created on</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,6 +39,9 @@
                             <tr>
                                 <th>{{ $loop->iteration }}</th>
                                 <td>{{ $post->title }}</td>
+                                <th>
+                                    <img src="/upload/{{ $post->image }}" alt="" width="80px" height="80px">
+                                </th>
                                 <td>
                                     <a href="{{ route('post.edit', ['id' => $post->id]) }}">
                                         <i class="fas fa-edit"></i>
@@ -63,6 +52,7 @@
                                     </a>
                                 </td>
                                 <td>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</td>
+                                <td>{{ Carbon\Carbon::parse($post->updated_at)->format('d-m-Y')  }}</td>
                             </tr>
                         @endforeach
                     @else

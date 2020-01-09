@@ -29,9 +29,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        // list posts on home page
-        $posts = Post::with('user')->orderBy('id','desc')->paginate(10);
-        return view('home', ['posts' => $posts]);
+        // list posts on home page "Admin part"
+        $posts = Post::with('user')->orderBy('id','desc')->paginate(5);
+        //$categories = Category::all();
+        return view('admin.post.postlist', ['posts' => $posts]);
     }
 
 

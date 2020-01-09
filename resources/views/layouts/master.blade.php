@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
@@ -18,11 +18,14 @@
 @yield('content')
 @include('partials.footer')
 
+
+
 <script type="text/javascript" src="{{ URL::to('js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="{{ URL::to('js/summernote.js') }}">
+
 @yield('scripts')
 </body>
 </html>

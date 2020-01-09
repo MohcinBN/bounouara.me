@@ -19,6 +19,8 @@
                 <p>
                     Or be quick and let us connect on twitter: <a href="https://twitter.com/BN_Geek" target="_blank">@BN_Geek</a>
                 </p>
+
+                <h2>Or use this contact Form</h2>
             </main>
         </div>
     </div>

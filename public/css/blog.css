@@ -115,3 +115,16 @@ p {
     border-top: 1px solid #eee;
     padding-top: 9px;
 }
+
+.category {
+    font-family: 'Alice', cursive;
+    font-size: 15px;
+}
+.category a {
+    color: rgb(180, 54, 54) !important;
+}
+
+.blogBtn:hover {
+    background-color:rgb(180, 54, 54) !important;
+    border-color:rgb(180, 54, 54) !important;
+}
